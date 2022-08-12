@@ -28,7 +28,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-       image: dhanishtha703/cms-authentication-service
+       image: dhanishtha703/claim-authservice-repo
        tags: 2159226, latest
        registry: docker.io
        dockerfile: Dockerfile
