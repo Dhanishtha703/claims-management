@@ -16,7 +16,7 @@ class UserModelTest {
 	void setUp() throws Exception {
 		
 		user1 = new User();
-		user2 = new User("CMS_M001", "user", "pass");
+		user2 = new User("CMS_M002", "user2", "pass2");
 	}
 	
 	@Test

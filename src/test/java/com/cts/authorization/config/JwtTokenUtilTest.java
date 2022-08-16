@@ -33,7 +33,7 @@ class JwtTokenUtilTest {
 	
 	@Test
 	void validateTokenTest() {
-		userDetails = new User("admin", "admin", new ArrayList<>());
+		userDetails = new User("user1", "pass1", new ArrayList<>());
 		String generateToken = util.generateToken(userDetails);
 		Boolean validateToken = util.validateToken(generateToken, userDetails);
 		assertThat(validateToken).isTrue();

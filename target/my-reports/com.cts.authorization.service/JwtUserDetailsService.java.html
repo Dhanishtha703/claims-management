@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtUserDetailsService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Authorizatiion-Microservice</a> &gt; <a href="index.source.html" class="el_package">com.cts.authorization.service</a> &gt; <span class="el_source">JwtUserDetailsService.java</span></div><h1>JwtUserDetailsService.java</h1><pre class="source lang-java linenums">package com.cts.authorization.service;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.cts.authorization.model.User;
+import com.cts.authorization.repository.UserDao;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service 
+<span class="nc" id="L18">@Slf4j</span>
+<span class="nc" id="L19">public class JwtUserDetailsService implements UserDetailsService {</span>
+	
+	@Autowired
+	private UserDao userDao;
+
+	@SuppressWarnings(&quot;unused&quot;)
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+
+	@Override
+	public UserDetails loadUserByUsername(String userName) {
+		/** fetching user by userName, if user is null the throw exception, otherwise
+		 * return user
+		 */
+<span class="nc" id="L33">		User user = userDao.findByUserName(userName);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">		if (user == null) {</span>
+<span class="nc" id="L35">			throw new UsernameNotFoundException(&quot;User not found with username: &quot; + userName);</span>
+		}
+		else {
+<span class="nc" id="L38">			log.info(&quot;User found&quot;);</span>
+<span class="nc" id="L39">			log.info(&quot;user successfully located&quot;);</span>
+		}
+		
+<span class="nc" id="L42">		org.springframework.security.core.userdetails.User u=new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),new ArrayList&lt;&gt;());</span>
+		
+		//return new MyUserDetails(user);
+<span class="nc" id="L45">		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),new ArrayList&lt;&gt;());</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
