@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -33,7 +35,17 @@ public class User {
             @Parameter(name = CustomIdGenerator.VALUE_PREFIX_PARAMETER, value = "CMS_M"),
             @Parameter(name = CustomIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%03d") })
 	private String id;
+	
+	// user name should not be null or empty
+	// user name should have at least 2 characters
+	@NotEmpty
+	@Size(min = 2 , message="user name should have at least 2 characters")
 	private String userName;
+	
+	// password should not be null or empty
+	// password should have at least 4 characters
+	@NotEmpty
+	@Size(min = 4 , message="password should have at least 4 characters")
 	private String password;
 	
 }
