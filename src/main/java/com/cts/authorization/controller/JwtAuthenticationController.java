@@ -97,9 +97,6 @@ public class JwtAuthenticationController {
 
 	}
 
-	@GetMapping("/health-check")
-	public ResponseEntity<String> healthCheck() {
-		return new ResponseEntity<>("auth-Ok", HttpStatus.OK);
-	}
+	
 
 }
